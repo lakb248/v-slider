@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vue Component</title>
+    </head>
+    <body>
+        <div id="container">
+            <div id="vue-slider-container" style="height: 300px;">
+                <vue-slider :speed="1000" :arrow="true" :dot="true">
+                    <slider-item>
+                        <div style="background-color:red;height:100%;">SliderA</div>
+                    </slider-item>
+                    <slider-item>
+                        <div style="background-color:blue;height:100%;">SliderB</div>
+                    </slider-item>
+                    <slider-item>
+                        <div style="background-color:green;height:100%;">SliderC</div>
+                    </slider-item>
+                </vue-slider>
+            </div>
+        </div>
+        <script type="text/javascript" src="/build/build.js"></script>
+    </body>
+</html>
