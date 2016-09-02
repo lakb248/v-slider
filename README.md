@@ -1,2 +1,2 @@
 # vue-slider
-vue-slider implement by vuejs
+A slider implement by vuejs
