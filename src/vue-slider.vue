@@ -1,5 +1,5 @@
 <template>
-    <div class="vue-slider-container" v-on:mouseover="stopPlay()" v-on:mouseout="play()">
+    <div class="vue-slider-container" v-on:mouseover="stopPlay()" v-on:mouseout="startPlay()">
         <div class="sliders-wrap">
             <slot></slot>
         </div>
@@ -72,7 +72,8 @@
                 index: 0,
                 sliders: [],
                 isMoving: false,
-                autoTimeout: -1
+                autoTimeout: -1,
+                isMouseIn: false
             };
         },
         methods: {
@@ -105,9 +106,11 @@
                 removeClass(this.sliders[previousIndex], 'active');
                 addClass(this.sliders[index], 'active');
                 this.isMoving = false;
-                this.autoInterval = setTimeout(() => {
-                    this.nextSlider();
-                }, this.auto);
+                if (!this.isMouseIn) {
+                    this.autoInterval = setTimeout(() => {
+                        this.nextSlider();
+                    }, this.auto);
+                }
             },
             gotoSlider(index) {
                 if (this.isMoving) {
@@ -151,7 +154,12 @@
                     this.nextSlider();
                 }, this.auto);
             },
+            startPlay() {
+                this.isMouseIn = false;
+                this.play();
+            },
             stopPlay() {
+                this.isMouseIn = true;
                 clearTimeout(this.autoInterval);
             }
         },
