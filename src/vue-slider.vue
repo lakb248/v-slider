@@ -1,5 +1,5 @@
 <template>
-    <div class="vue-slider-container">
+    <div class="vue-slider-container" v-on:mouseover="stopPlay()" v-on:mouseout="play()">
         <div class="sliders-wrap">
             <slot></slot>
         </div>
@@ -146,15 +146,18 @@
             preSlider() {
                 this.gotoSlider(this.index - 1);
             },
-            play(start) {
+            play() {
                 this.autoInterval = setTimeout(() => {
                     this.nextSlider();
                 }, this.auto);
+            },
+            stopPlay() {
+                clearTimeout(this.autoInterval);
             }
         },
         ready() {
             this.initSliders();
-            this.play(0);
+            this.play();
         }
     };
 </script>
