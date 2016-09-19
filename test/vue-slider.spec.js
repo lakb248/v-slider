@@ -41,26 +41,48 @@ describe('vue-slider.vue', () => {
         initSlider();
         expect(document.querySelectorAll('.slider').length).toBe(3);
     });
-    it('should transfer to the second slider after 3000ms', done => {
+    it('should move to the second slider after 3000ms', done => {
         var vm = initSlider();
         setTimeout(() => {
             expect(vm.$refs.slider.index).toBe(1);
             done();
         }, 2200);
     });
-    it('should transfer to the third slider after 6000ms', done => {
+    it('should move to the third slider after 6000ms', done => {
         var vm = initSlider();
         setTimeout(() => {
             expect(vm.$refs.slider.index).toBe(2);
             done();
         }, 4800);
     });
-    it('should transfer to the first slider after 9000ms', done => {
+    it('should move to the first slider after 9000ms', done => {
         var vm = initSlider();
         setTimeout(() => {
             expect(vm.$refs.slider.index).toBe(0);
             done();
         }, 7400);
+    });
+    it('should move to the next slider if right arrow clicked', () => {
+        var vm = initSlider();
+        var rightArrow = vm.$el.querySelector('.right-arrow span');
+        rightArrow.click();
+        expect(vm.$refs.slider.index).toBe(1);
+    });
+    it('should move to the previous slider if left arrow clicked', () => {
+        var vm = initSlider();
+        var leftArrow = vm.$el.querySelector('.left-arrow span');
+        leftArrow.click();
+        expect(vm.$refs.slider.index).toBe(2);
+    });
+    it('should not move if the slider is moving', () => {
+        var vm = initSlider();
+        var rightArrow = vm.$el.querySelector('.right-arrow span');
+        rightArrow.click();
+        setTimeout(() => {
+            rightArrow.click();
+            expect(vm.$refs.slider.index).toBe(1);
+            done();
+        }, 200);
     });
 });
 
