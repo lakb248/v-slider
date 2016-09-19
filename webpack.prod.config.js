@@ -9,7 +9,7 @@ config.entry = './src/index.js';
 config.output = {
     path: path.resolve('dist') + '/',
     filename: 'vue-slider.min.js',
-    library: 'vueSlider',
+    library: 'VueSlider',
     libraryTarget: 'umd'
 };
 
