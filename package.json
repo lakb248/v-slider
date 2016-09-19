@@ -1,5 +1,5 @@
 {
-  "name": "vue-slider",
+  "name": "v-slider",
   "version": "0.0.1",
   "description": "A slider implement by vuejs",
   "main": "./dist/vue-slider.min.js",
