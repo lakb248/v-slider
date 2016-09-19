@@ -8,8 +8,8 @@ var path = require('path');
 config.entry = './src/index.js';
 config.output = {
     path: path.resolve('dist') + '/',
-    filename: 'vue-slider.min.js',
-    library: 'VueSlider',
+    filename: 'v-slider.min.js',
+    library: 'VSlider',
     libraryTarget: 'umd'
 };
 

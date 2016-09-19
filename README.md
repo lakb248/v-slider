@@ -1,2 +1,2 @@
-# vue-slider
+# v-slider
 A slider implement by vuejs
