@@ -1,4 +1,4 @@
-import VueSlider from './vue-slider.vue';
+import SliderContainer from './vue-slider.vue';
 import SliderItem from './slider.vue';
 
-export {VueSlider, SliderItem};
+export {SliderContainer, SliderItem};
