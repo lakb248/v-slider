@@ -4,7 +4,7 @@ import {SliderContainer, SliderItem} from './src/index.js';
 new Vue({
     el: '#container',
     components: {
-        'vue-slider': SliderContainer,
+        'v-slider': SliderContainer,
         'slider-item': SliderItem
     },
     data() {
