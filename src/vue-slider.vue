@@ -20,6 +20,11 @@
 </template>
 
 <script>
+    /**
+     * add class to element
+     * @param {Object} el        the element
+     * @param {String} className the className to add
+     */
     var addClass = (el, className) => {
         if (el.classList) {
             el.classList.add(className);
@@ -27,6 +32,12 @@
             el.className += ' ' + className;
         }
     };
+
+    /**
+     * remove class of the element
+     * @param {Object} el        the element
+     * @param {String} className the className to remove
+     */
     var removeClass = (el, className) => {
         if (el.classList) {
             el.classList.remove(className);
@@ -36,12 +47,24 @@
                 '(\\b|$)', 'gi'), ' ');
         }
     };
+
+    /**
+     * set transform style of element
+     * @param {Object} el    the elment
+     * @param {String} value the value of transform
+     */
     var setTransform = (el, value) => {
         el.style.webkitTransform = value;
         el.style.msTransform = value;
         el.style.mozTransform = value;
         el.style.transform = value;
     };
+
+    /**
+     * set transition style of element
+     * @param {Object} el    the elment
+     * @param {String} value the value of transition
+     */
     var setTransition = (el, value) => {
         el.style.webkitTransition = value;
         el.style.msTransition = value;
@@ -120,11 +143,15 @@
                 this.isMoving = true;
                 var previousIndex = this.index;
                 if (index !== previousIndex) {
+                    // previous slider
                     if (index < previousIndex) {
+                        // move to last slider if current slider is the first slider
                         if (index < 0) {
                             index = this.sliders.length - 1;
                         }
+                        // move the slider that will be moved to the left of the container
                         setTransform(this.sliders[index], 'translateX(-100%)');
+                        // move the slider into the container, and move previous slider out of the container
                         setTimeout(() => {
                             this.translate(this.sliders[previousIndex], '100%');
                             this.translate(this.sliders[index], '0', () => {
@@ -132,6 +159,8 @@
                             });
                         }, 50);
                     } else {
+                        // next slider
+                        // move to the first slider if current slider is the last slider
                         if (index > this.sliders.length - 1) {
                             index = 0;
                         }
