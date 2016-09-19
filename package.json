@@ -1,6 +1,6 @@
 {
   "name": "v-slider",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A slider implement by vuejs",
   "main": "./dist/vue-slider.min.js",
   "scripts": {
@@ -8,6 +8,13 @@
     "build": "webpack --progress --config webpack.prod.config.js",
     "test": "karma start karma.config.js",
     "ci": "npm run test && npm run build && codecov -t 0e93cce5-098d-47b5-8aaf-bad891fa72e6 coverage/cobertura-coverage.xml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lakb248/v-slider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lakb248/v-slider/issues"
   },
   "keywords": [
     "vue-component",
