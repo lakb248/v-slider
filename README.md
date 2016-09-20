@@ -69,10 +69,12 @@ new Vue({
 
 ### Props
 
-+ speed: the translation speed of sliders, default 300
-+ auto: the interval of each slide, default 3000
-+ dot: show dot indicator or not, default true
-+ arrow: show arrow indicator or not, default true
+| property | description |
+|:|:|
+|speed| the translation speed of sliders, default 300 |
+|auto| the interval of each slide, default 3000 |
+|dot| show dot indicator or not, default true |
+|arrow| show arrow indicator or not, default true |
 
 ## License
 
