@@ -214,6 +214,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
+	    overflow: hidden;
             -ms-transform: translateX(100%);
             -moz-transform: translateX(100%);
             -webkit-transform: translateX(100%);
