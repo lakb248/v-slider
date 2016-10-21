@@ -4,9 +4,9 @@ import VueSlider from '../src/vue-slider.vue';
 import Slider from '../src/slider.vue';
 
 var initSlider = () => {
-    return new Vue({
+    var slider = new Vue({
         template: '<div style="width:200px;height:50px;">' +
-            '<vue-slider v-ref:slider :speed="400" ' +
+            '<vue-slider ref="slider" :speed="400" ' +
                 ':arrow="true" :dot="true" :auto="2000">' +
                 '<slider-item>' +
                     '<div class="slider" style="display:none' +
@@ -26,7 +26,9 @@ var initSlider = () => {
             'vue-slider': VueSlider,
             'slider-item': Slider
         }
-    }).$mount().$appendTo('body');
+    }).$mount();
+    document.body.appendChild(slider.$el);
+    return slider;
 };
 describe('vue-slider.vue', () => {
     var originalTimeout;
@@ -44,45 +46,57 @@ describe('vue-slider.vue', () => {
     it('should move to the second slider after 3000ms', done => {
         var vm = initSlider();
         setTimeout(() => {
-            expect(vm.$refs.slider.index).toBe(1);
+            expect(vm.$refs.slider.current).toBe(1);
             done();
         }, 2200);
     });
     it('should move to the third slider after 6000ms', done => {
         var vm = initSlider();
         setTimeout(() => {
-            expect(vm.$refs.slider.index).toBe(2);
+            expect(vm.$refs.slider.current).toBe(2);
             done();
         }, 4800);
     });
     it('should move to the first slider after 9000ms', done => {
         var vm = initSlider();
         setTimeout(() => {
-            expect(vm.$refs.slider.index).toBe(0);
+            expect(vm.$refs.slider.current).toBe(0);
             done();
         }, 7400);
     });
-    it('should move to the next slider if right arrow clicked', () => {
+    it('should move to the next slider if right arrow clicked', done => {
         var vm = initSlider();
-        var rightArrow = vm.$el.querySelector('.right-arrow span');
-        rightArrow.click();
-        expect(vm.$refs.slider.index).toBe(1);
-    });
-    it('should move to the previous slider if left arrow clicked', () => {
-        var vm = initSlider();
-        var leftArrow = vm.$el.querySelector('.left-arrow span');
-        leftArrow.click();
-        expect(vm.$refs.slider.index).toBe(2);
-    });
-    it('should not move if the slider is moving', () => {
-        var vm = initSlider();
-        var rightArrow = vm.$el.querySelector('.right-arrow span');
-        rightArrow.click();
-        setTimeout(() => {
+        Vue.nextTick(() => {
+            var rightArrow = vm.$el.querySelector('.right-arrow span');
             rightArrow.click();
-            expect(vm.$refs.slider.index).toBe(1);
-            done();
-        }, 200);
+            Vue.nextTick(() => {
+                expect(vm.$refs.slider.current).toBe(1);
+                done();
+            });
+        });
+    });
+    it('should move to the previous slider if left arrow clicked', done => {
+        var vm = initSlider();
+        Vue.nextTick(() => {
+            var leftArrow = vm.$el.querySelector('.left-arrow span');
+            leftArrow.click();
+            Vue.nextTick(() => {
+                expect(vm.$refs.slider.current).toBe(2);
+                done();
+            });
+        });
+    });
+    it('should not move if the slider is moving', done => {
+        var vm = initSlider();
+        Vue.nextTick(() => {
+            var rightArrow = vm.$el.querySelector('.right-arrow span');
+            rightArrow.click();
+            setTimeout(() => {
+                rightArrow.click();
+                expect(vm.$refs.slider.current).toBe(1);
+                done();
+            }, 200);
+        });
     });
 });
 

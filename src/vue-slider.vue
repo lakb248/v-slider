@@ -9,10 +9,10 @@
         </div>
         <div class="indicator-container" v-if="dot">
             <ul class="indicator-list">
-                <li v-for="slider in sliders" track-by="$index"
-                    data-index="{{$index}}"
-                    v-bind:class="{'active': index == $index}"
-                    v-on:click="gotoSlider($index)"
+                <li v-for="(slider, index) in sliders"
+                    :data-index="index"
+                    v-bind:class="{'active': current == index}"
+                    v-on:click="gotoSlider(index)"
                     ></li>
             </ul>
         </div>
@@ -92,7 +92,7 @@
         },
         data() {
             return {
-                index: 0,
+                current: 0,
                 sliders: [],
                 isMoving: false,
                 autoTimeout: -1,
@@ -103,11 +103,11 @@
             initSliders() {
                 var children = this.$children;
                 var sliders = [];
-                this.index = 0;
+                this.current = 0;
                 children.forEach((slider, index) => {
                     sliders.push(slider.$el);
                     removeClass(slider.$el, 'active');
-                    if (index === this.index) {
+                    if (index === this.current) {
                         addClass(slider.$el, 'active');
                     }
                 });
@@ -141,7 +141,7 @@
                 }
                 clearInterval(this.autoInterval);
                 this.isMoving = true;
-                var previousIndex = this.index;
+                var previousIndex = this.current;
                 if (index !== previousIndex) {
                     // previous slider
                     if (index < previousIndex) {
@@ -170,13 +170,13 @@
                         });
                     }
                 }
-                this.index = index;
+                this.current = index;
             },
             nextSlider() {
-                this.gotoSlider(this.index + 1);
+                this.gotoSlider(this.current + 1);
             },
             preSlider() {
-                this.gotoSlider(this.index - 1);
+                this.gotoSlider(this.current - 1);
             },
             play() {
                 this.autoInterval = setTimeout(() => {
@@ -192,9 +192,11 @@
                 clearTimeout(this.autoInterval);
             }
         },
-        ready() {
-            this.initSliders();
-            this.play();
+        mounted() {
+            this.$nextTick(() => {
+                this.initSliders();
+                this.play();
+            });
         }
     };
 </script>
