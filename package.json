@@ -1,6 +1,6 @@
 {
   "name": "v-slider",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A slider implement by vuejs",
   "main": "./dist/v-slider.min.js",
   "scripts": {
