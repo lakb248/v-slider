@@ -16,6 +16,12 @@
 npm install v-slider --save
 ```
 
+And, if you are using vue 2.0
+
+```bash
+npm install v-slider@next --save
+```
+
 ### CommonJS
 
 ```javascript
